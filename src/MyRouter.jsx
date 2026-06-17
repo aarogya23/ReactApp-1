@@ -1,0 +1,43 @@
+import React from 'react'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import First from './First'
+import Second from './Second'
+import LetConstVar from './pages/LetConstVar'
+import RevisionLayout from './components/layouts/RevisionLayout'
+import PageNotFound from './pages/PageNotFound'
+import Layout from './components/layouts/Layout'
+import Mycarosel from './components/Mycarosel'
+import Home from './pages/Home'
+import AboutUs from './pages/AboutUs'
+import ContactUs from './pages/Contactus'
+import Services from './pages/Services'
+const MyRouter = () => {
+  return (
+    <Router>    
+        <Routes>   
+          <Route element={<Layout />} >       
+            <Route path='/' element={<First />} />
+            <Route path='/second' element={<Second />} />
+
+            
+
+            <Route path='/revision' element={<RevisionLayout />} >
+                <Route path='topic1' element={<LetConstVar />} />
+                <Route path='First' element={<First />} />
+            </Route>
+
+            <Route path='*' element={<PageNotFound />} />
+
+            <Route path='/carosel' element={<Mycarosel/>} />
+            <Route path='/home' element={<Home/>} />
+            <Route path='/aboutUs' element={<AboutUs/>} />
+            <Route path='/contactUs' element={<ContactUs/>} />
+            <Route path='/services' element={<Services/>} />
+
+            </Route>  
+        </Routes>    
+    </Router>
+  )
+}
+
+export default MyRouter

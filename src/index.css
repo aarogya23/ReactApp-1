@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+h1{
+
+  font-size: 150px;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
+
+.sum{
+  background-color: lightblue;
+  font-size: 50px;
+  text-align: center;
+  font-family: 'Arial', sans-serif;
+}
