@@ -1,93 +1,74 @@
 import React from 'react'
-import { FaBullseye, FaEye, FaLightbulb } from 'react-icons/fa'
+import { FaBullseye, FaEye, FaLightbulb, FaHandshake } from 'react-icons/fa'
 
 const stats = [
-  { label: 'Years of Experience', value: '10+' },
-  { label: 'Happy Clients', value: '500+' },
-  { label: 'Projects Completed', value: '1,200+' },
-  { label: 'Team Members', value: '50+' },
+  { label: 'Verified Listings', value: '8K+' },
+  { label: 'Active Gamers', value: '12K+' },
+  { label: 'Trade-ins Completed', value: '4.5K+' },
+  { label: 'Cities Served', value: '25+' },
 ]
 
 function AboutUs() {
   return (
     <section className="min-h-screen bg-white py-16 px-6 lg:px-20">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
-
-        {/* LEFT — Text Content */}
         <div className="flex-1 flex flex-col gap-8">
-
-          {/* Eyebrow + Heading */}
           <div>
-            <span className="text-xs font-semibold tracking-widest uppercase text-indigo-500">
+            <span className="text-xs font-bold tracking-widest uppercase text-slate-500">
               Who We Are
             </span>
-            <h2 className="mt-3 text-2xl lg:text-3xl font-bold text-gray-900 leading-tight">
-              About Us
-            </h2>
-            <div className="mt-4 w-14 h-1 bg-indigo-500 rounded-full" />
+            <h1 className="mt-3 text-3xl lg:text-4xl font-black text-stone-800 leading-tight">
+              Built for gamers who buy, sell, and trade smarter.
+            </h1>
+            <div className="mt-4 w-14 h-1 bg-amber-600 rounded-full" />
           </div>
 
-          {/* Intro */}
-          <p className="text-lg text-gray-600 leading-relaxed">
-            We are a passionate team dedicated to crafting thoughtful digital experiences.
-            Founded on the belief that great design solves real problems, we partner with
-            businesses to turn complex challenges into elegant, human-centered solutions.
+          <p className="text-lg text-slate-600 leading-relaxed">
+            GameBazaar connects players, collectors, and local sellers in one marketplace for new releases, pre-owned games, digital codes, consoles, and accessories.
           </p>
 
-          {/* Details */}
           <div className="flex flex-col gap-5">
             <DetailItem
               icon={<FaBullseye />}
               title="Our Mission"
-              description="To empower every client with tools and strategies that drive meaningful, lasting growth."
+              description="Make game buying and selling simple, secure, and affordable for every player."
             />
             <DetailItem
               icon={<FaEye />}
               title="Our Vision"
-              description="A world where technology feels intuitive, accessible, and genuinely useful to everyone."
+              description="Create Nepal's most trusted gaming marketplace for digital and physical titles."
             />
             <DetailItem
               icon={<FaLightbulb />}
-              title="Our Values"
-              description="Transparency, creativity, collaboration, and a relentless commitment to quality in everything we do."
+              title="Our Promise"
+              description="Verified listings, clear pricing, helpful support, and fair trade-in offers."
+            />
+            <DetailItem
+              icon={<FaHandshake />}
+              title="Community First"
+              description="We support local sellers, collectors, streamers, and everyday gamers."
             />
           </div>
 
-          {/* Stats Grid */}
           <div className="grid grid-cols-2 gap-4 mt-2">
             {stats.map((stat) => (
-              <div
-                key={stat.label}
-                className="bg-indigo-50 rounded-2xl px-5 py-4 border border-indigo-100"
-              >
-                <p className="text-3xl font-extrabold text-indigo-600">{stat.value}</p>
-                <p className="text-sm text-gray-500 mt-1">{stat.label}</p>
+              <div key={stat.label} className="bg-slate-50 rounded-lg px-5 py-4 border border-slate-200">
+                <p className="text-3xl font-black text-stone-800">{stat.value}</p>
+                <p className="text-sm text-slate-500 mt-1">{stat.label}</p>
               </div>
             ))}
           </div>
-
-          {/* CTA */}
-          <div className="flex gap-3 mt-2">
-            <button className="bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-semibold px-6 py-3 rounded-xl transition-colors">
-              Meet the Team
-            </button>
-            <button className="border border-gray-300 hover:border-indigo-400 text-gray-700 hover:text-indigo-600 text-sm font-semibold px-6 py-3 rounded-xl transition-colors">
-              Our Work →
-            </button>
-          </div>
         </div>
 
-        {/* RIGHT — Single Image */}
         <div className="flex-1 w-full">
-          <div className="overflow-hidden rounded-3xl shadow-xl w-full h-[520px]">
+          <div className="overflow-hidden rounded-lg shadow-xl w-full h-[520px]">
             <img
               src="/kdb.webp"
-              alt="About us"
+              alt="Game marketplace community"
               className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
             />
           </div>
         </div>
-
       </div>
     </section>
   )
@@ -96,12 +77,12 @@ function AboutUs() {
 function DetailItem({ icon, title, description }) {
   return (
     <div className="flex gap-4 items-start">
-      <div className="w-10 h-10 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-600 text-xl shrink-0">
+      <div className="w-10 h-10 rounded-lg bg-amber-50 flex items-center justify-center text-amber-700 text-xl shrink-0">
         {icon}
       </div>
       <div>
-        <h3 className="font-semibold text-gray-800 text-base">{title}</h3>
-        <p className="text-sm text-gray-500 mt-0.5 leading-relaxed">{description}</p>
+        <h2 className="font-bold text-slate-800 text-base">{title}</h2>
+        <p className="text-sm text-slate-500 mt-0.5 leading-relaxed">{description}</p>
       </div>
     </div>
   )

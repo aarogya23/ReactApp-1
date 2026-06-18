@@ -6,7 +6,7 @@ const Revision = () => {
     <div className='flex justify-evenly h=[7vh]'>
         
        <Link to='/revision/topic1'>
-            <button className='bg-blue-500 text-white px-4 py-2 rounded'>
+            <button className='bg-amber-600 text-white px-4 py-2 rounded'>
             let/const/var
             </button>
       </Link>

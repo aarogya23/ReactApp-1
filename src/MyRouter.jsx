@@ -6,7 +6,6 @@ import LetConstVar from './pages/LetConstVar'
 import RevisionLayout from './components/layouts/RevisionLayout'
 import PageNotFound from './pages/PageNotFound'
 import Layout from './components/layouts/Layout'
-import Mycarosel from './components/Mycarosel'
 import Home from './pages/Home'
 import AboutUs from './pages/AboutUs'
 import ContactUs from './pages/Contactus'
@@ -28,7 +27,6 @@ const MyRouter = () => {
 
             <Route path='*' element={<PageNotFound />} />
 
-            <Route path='/carosel' element={<Mycarosel/>} />
             <Route path='/home' element={<Home/>} />
             <Route path='/aboutUs' element={<AboutUs/>} />
             <Route path='/contactUs' element={<ContactUs/>} />

@@ -8,7 +8,7 @@ const LetConstVar = () => {
 
     return (
         <>
-        <div className="text-4xl text-center underline text-blue-400 bg-color-blue-400 py-5 font-bold hover:text-5xl">LetConstVar</div>
+        <div className="text-4xl text-center underline text-stone-800 bg-stone-50 py-5 font-bold hover:text-5xl">LetConstVar</div>
         
         
         <div className="lg:grid lg:grid-cols-3">

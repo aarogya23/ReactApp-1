@@ -1,68 +1,60 @@
 import React from 'react'
 import {
-  FaFutbol,
-  FaRunning,
-  FaTrophy,
-  FaUsers,
-  FaTicketAlt,
-  FaShoppingBag,
+  FaGamepad,
+  FaTags,
+  FaShieldAlt,
+  FaTruck,
+  FaCoins,
+  FaHeadset,
 } from 'react-icons/fa'
+import { Link } from 'react-router-dom'
 
 const services = [
   {
-    icon: <FaFutbol />,
-    title: 'Football Training',
-    description:
-      'Professional coaching sessions for all skill levels — from beginner drills to advanced tactical training on the pitch.',
+    icon: <FaGamepad />,
+    title: 'Game Marketplace',
+    description: 'Buy new releases, pre-owned discs, digital codes, consoles, and gaming accessories from verified sellers.',
   },
   {
-    icon: <FaRunning />,
-    title: 'Sports Fitness & Conditioning',
-    description:
-      'Personalized fitness programs designed to improve stamina, speed, and agility for peak athletic performance.',
+    icon: <FaTags />,
+    title: 'Sell Your Games',
+    description: 'List used games with photos, platform details, condition, and your asking price in minutes.',
   },
   {
-    icon: <FaTrophy />,
-    title: 'Tournament Organization',
-    description:
-      'We plan and manage local and national football tournaments, handling fixtures, referees, and prize ceremonies.',
+    icon: <FaShieldAlt />,
+    title: 'Buyer Protection',
+    description: 'Every order is backed by listing checks, payment safety, and support for disputed purchases.',
   },
   {
-    icon: <FaUsers />,
-    title: 'Team Management',
-    description:
-      'Full team registration, squad management, and performance tracking services for clubs and academies.',
+    icon: <FaTruck />,
+    title: 'Local Delivery',
+    description: 'Choose digital delivery, pickup, or shipping depending on the seller and product type.',
   },
   {
-    icon: <FaTicketAlt />,
-    title: 'Match Ticketing',
-    description:
-      'Easy online ticketing for live matches and sports events — secure booking, seat selection, and e-tickets.',
+    icon: <FaCoins />,
+    title: 'Trade-in Offers',
+    description: 'Turn old titles into wallet credit and use it toward new games, gear, or subscriptions.',
   },
   {
-    icon: <FaShoppingBag />,
-    title: 'Sports Merchandise',
-    description:
-      'Official jerseys, boots, accessories, and fan gear — all available in our store with fast delivery.',
+    icon: <FaHeadset />,
+    title: 'Gamer Support',
+    description: 'Get help with orders, seller setup, code activation, returns, and marketplace questions.',
   },
 ]
 
 function Services() {
   return (
     <section className="bg-white min-h-screen">
-
-      {/* ── HEADING ── */}
-      <div className="py-12 px-6 text-center border-b border-gray-100">
-        <p className="text-indigo-500 text-xs font-semibold tracking-widest uppercase mb-2">
-          What We Provide
+      <div className="py-12 px-6 text-center border-b border-slate-100">
+        <p className="text-slate-500 text-xs font-bold tracking-widest uppercase mb-2">
+          Buy And Sell
         </p>
-        <h2 className="text-xl lg:text-2xl font-bold text-gray-900">Our Services</h2>
-        <p className="mt-3 text-gray-400 text-sm max-w-lg mx-auto">
-          From training to tournaments, we provide everything your team needs to compete, grow, and win.
+        <h1 className="text-3xl lg:text-4xl font-black text-stone-800">Marketplace Services</h1>
+        <p className="mt-3 text-slate-500 text-sm max-w-lg mx-auto">
+          Everything needed to discover games, sell used titles, trade safely, and keep your library fresh.
         </p>
       </div>
 
-      {/* ── SERVICES GRID ── */}
       <div className="max-w-7xl mx-auto px-6 lg:px-20 py-16">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service) => (
@@ -71,35 +63,33 @@ function Services() {
         </div>
       </div>
 
-      {/* ── CTA BANNER ── */}
-      <div className="mx-6 lg:mx-20 mb-16 bg-indigo-600 rounded-3xl px-8 py-12 flex flex-col lg:flex-row items-center justify-between gap-6">
+      <div className="mx-6 lg:mx-20 mb-16 bg-slate-50 border border-slate-200 rounded-lg px-8 py-12 flex flex-col lg:flex-row items-center justify-between gap-6">
         <div>
-          <h2 className="text-2xl font-bold text-white">Ready to get started?</h2>
-          <p className="text-indigo-200 text-sm mt-1">
-            Let's talk about your project and find the best solution for you.
+          <h2 className="text-2xl font-black text-stone-800">Ready to sell your games?</h2>
+          <p className="text-slate-500 text-sm mt-1">
+            Create a listing, set the price, and reach gamers looking for their next title.
           </p>
         </div>
-        <button className="bg-white text-indigo-600 font-semibold text-sm px-8 py-3 rounded-xl hover:bg-indigo-50 transition-colors shrink-0">
-          Contact Us →
-        </button>
+        <Link to="/contactUs" className="bg-amber-600 text-white font-black text-sm px-8 py-3 rounded-lg hover:bg-amber-700 transition-colors shrink-0">
+          Contact Seller Support
+        </Link>
       </div>
-
     </section>
   )
 }
 
 function ServiceCard({ icon, title, description }) {
   return (
-    <div className="group bg-white border border-gray-100 rounded-2xl p-6 shadow-sm hover:shadow-md hover:border-indigo-200 transition-all duration-300 flex flex-col gap-4">
-      <div className="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-600 text-2xl group-hover:bg-indigo-600 group-hover:text-white transition-colors duration-300">
+    <div className="group bg-white border border-slate-200 rounded-lg p-6 shadow-sm hover:shadow-md hover:border-slate-300 transition-all duration-300 flex flex-col gap-4">
+      <div className="w-12 h-12 rounded-lg bg-amber-50 flex items-center justify-center text-amber-700 text-2xl group-hover:bg-amber-600 group-hover:text-white transition-colors duration-300">
         {icon}
       </div>
       <div>
-        <h3 className="text-lg font-bold text-gray-900">{title}</h3>
-        <p className="text-sm text-gray-500 mt-2 leading-relaxed">{description}</p>
+        <h2 className="text-lg font-black text-stone-800">{title}</h2>
+        <p className="text-sm text-slate-500 mt-2 leading-relaxed">{description}</p>
       </div>
-      <span className="text-indigo-500 text-sm font-medium mt-auto group-hover:underline cursor-pointer">
-        Learn more →
+      <span className="text-amber-700 text-sm font-bold mt-auto group-hover:underline cursor-pointer">
+        Learn more
       </span>
     </div>
   )
