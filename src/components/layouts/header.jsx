@@ -51,6 +51,10 @@ const Header = () => {
               <FiUser className="text-lg" />
               Login
             </Link>
+            <Link to="/counter" className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-semibold text-slate-600 hover:text-amber-700 hover:bg-amber-50 transition-all">
+              <FiUser className="text-lg" />
+              Counter
+            </Link>
             <Link to="#" className="relative flex items-center gap-1.5 px-3 py-2 rounded-lg text-slate-600 hover:text-amber-700 hover:bg-amber-50 transition-all">
               <FiShoppingCart className="text-xl" />
               <span className="absolute -top-0.5 -right-0.5 bg-amber-600 text-white text-xs font-black rounded-full w-5 h-5 flex items-center justify-center">
