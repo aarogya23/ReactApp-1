@@ -12,6 +12,7 @@ import ContactUs from './pages/Contactus'
 import Services from './pages/Services'
 import Counter from './hooks/Counter'
 import Classroom from './pages/Classroom'
+import DataFetch from './hooks/DataFetch'
 const MyRouter = () => {
   return (
     <Router>    
@@ -36,6 +37,7 @@ const MyRouter = () => {
 
             <Route path='counter' element={<Counter/>} />
             <Route path='classroom' element={<Classroom/>} />
+            <Route path='datafetch' element={<DataFetch/>} />
             </Route>  
         </Routes>    
     </Router>
