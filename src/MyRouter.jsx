@@ -11,6 +11,7 @@ import AboutUs from './pages/AboutUs'
 import ContactUs from './pages/Contactus'
 import Services from './pages/Services'
 import Counter from './hooks/Counter'
+import Classroom from './pages/Classroom'
 const MyRouter = () => {
   return (
     <Router>    
@@ -34,7 +35,7 @@ const MyRouter = () => {
             <Route path='/services' element={<Services/>} />
 
             <Route path='counter' element={<Counter/>} />
-
+            <Route path='classroom' element={<Classroom/>} />
             </Route>  
         </Routes>    
     </Router>
