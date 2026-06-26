@@ -13,6 +13,7 @@ import Services from './pages/Services'
 import Counter from './hooks/Counter'
 import Classroom from './pages/Classroom'
 import DataFetch from './hooks/DataFetch'
+import Post from './hooks/Post'
 const MyRouter = () => {
   return (
     <Router>    
@@ -38,6 +39,7 @@ const MyRouter = () => {
             <Route path='counter' element={<Counter/>} />
             <Route path='classroom' element={<Classroom/>} />
             <Route path='datafetch' element={<DataFetch/>} />
+            <Route path='/post/:id' element={<Post/>} />
             </Route>  
         </Routes>    
     </Router>
