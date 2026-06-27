@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FiMenu, FiMoon, FiSearch, FiShoppingCart, FiSun, FiUser, FiX } from 'react-icons/fi'
-import { FaFire } from 'react-icons/fa'
 import { MyThemeContext } from '../../App'
 
 const navLinks = [
@@ -24,11 +23,7 @@ const Header = () => {
     <header className="dashboard-header">
       <div className="dashboard-nav">
         <Link to="/" className="studio-logo" onClick={() => setMenuOpen(false)}>
-          <FaFire className="studio-logo-icon" />
-          <span>
-            <strong>Trinetra</strong>
-            <small>Game Studio</small>
-          </span>
+          <img src={isDark ? '/white.png' : '/black.png'} alt="Trinetra Game Studio" />
         </Link>
 
         <nav className="desktop-links">

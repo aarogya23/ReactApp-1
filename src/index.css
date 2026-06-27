@@ -59,35 +59,15 @@
 .studio-logo {
   display: inline-flex;
   align-items: center;
-  gap: 10px;
   min-width: 118px;
-  color: var(--text-main);
   text-decoration: none;
-  text-transform: uppercase;
 }
 
-.studio-logo-icon {
-  color: var(--accent);
-  font-size: 34px;
-  filter: drop-shadow(0 8px 14px rgba(240, 160, 0, 0.3));
-}
-
-.studio-logo strong,
-.studio-logo small {
+.studio-logo img {
+  width: 120px;
+  height: 70px;
+  object-fit: contain;
   display: block;
-  line-height: 0.9;
-  letter-spacing: 0.08em;
-}
-
-.studio-logo strong {
-  font-size: 17px;
-  font-weight: 900;
-}
-
-.studio-logo small {
-  margin-top: 5px;
-  font-size: 10px;
-  font-weight: 800;
 }
 
 .desktop-links {
@@ -550,12 +530,9 @@
     min-height: 76px;
   }
 
-  .studio-logo strong {
-    font-size: 14px;
-  }
-
-  .studio-logo small {
-    font-size: 8px;
+  .studio-logo img {
+    width: 96px;
+    height: 58px;
   }
 
   .hero-carousel-section {
