@@ -1,6 +1,7 @@
 import React from 'react'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 
 const slides = [
   {
@@ -22,19 +23,33 @@ const slides = [
 
 const Mycarosel = () => {
   return (
-    <div className="carousel-frame relative overflow-hidden">
-      <div className="carousel-side-rail left-0" />
-      <div className="carousel-side-rail right-0" />
-      <Carousel autoPlay infiniteLoop showThumbs={false} showStatus={false}>
+    <div className="dashboard-carousel">
+      <div className="carousel-glow left" />
+      <div className="carousel-glow right" />
+      <Carousel
+        autoPlay
+        infiniteLoop
+        showThumbs={false}
+        showStatus={false}
+        showIndicators={false}
+        renderArrowPrev={(clickHandler, hasPrev) => (
+          <button className="carousel-arrow carousel-arrow-left" onClick={clickHandler} disabled={!hasPrev} aria-label="Previous slide">
+            <FiChevronLeft />
+          </button>
+        )}
+        renderArrowNext={(clickHandler, hasNext) => (
+          <button className="carousel-arrow carousel-arrow-right" onClick={clickHandler} disabled={!hasNext} aria-label="Next slide">
+            <FiChevronRight />
+          </button>
+        )}
+      >
         {slides.map((slide) => (
-          <div key={slide.title} className="relative h-[520px] bg-white">
-            <img src={slide.image} alt={slide.title} className="h-full w-full object-cover opacity-90 carousel-image-motion" />
-            <div className="absolute inset-0 flex items-end">
-              <div className="w-full bg-gradient-to-t from-white via-white/80 to-transparent px-6 pb-16 pt-32 text-left">
-                <div className="max-w-7xl mx-auto carousel-copy-motion">
-                  <h2 className="text-4xl lg:text-6xl font-black text-stone-800">{slide.title}</h2>
-                  <p className="mt-4 max-w-xl text-lg text-slate-600">{slide.text}</p>
-                </div>
+          <div key={slide.title} className="dashboard-slide">
+            <img src={slide.image} alt={slide.title} className="carousel-image-motion" />
+            <div className="slide-caption">
+              <div>
+                <h2>{slide.title}</h2>
+                <p>{slide.text}</p>
               </div>
             </div>
           </div>
