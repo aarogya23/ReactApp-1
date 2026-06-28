@@ -17,6 +17,8 @@ const App = () => {
 
   useEffect(() => {
     localStorage.setItem('trinetra-theme', theme)
+    document.body.classList.remove('theme-dark', 'theme-light')
+    document.body.classList.add(theme === 'dark' ? 'theme-dark' : 'theme-light')
   }, [theme])
 
   return (

@@ -1,81 +1,78 @@
 import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { FiMenu, FiMoon, FiSearch, FiShoppingCart, FiSun, FiUser, FiX } from 'react-icons/fi'
+import {
+  FiArrowLeft,
+  FiSearch,
+  FiBookmark,
+  FiGift,
+  FiShoppingCart,
+  FiUsers,
+  FiSun,
+  FiMoon,
+} from 'react-icons/fi'
 import { MyThemeContext } from '../../App'
 
-const navLinks = [
-  { to: '/', label: 'Home' },
-  { to: '#', label: 'AskAi' },
-  { to: '/second', label: 'Library' },
-  { to: '#', label: 'Wishlist' },
-]
+const navTabs = ['Discover', 'Browse', 'News']
 
 const Header = () => {
-  const [menuOpen, setMenuOpen] = useState(false)
+  const [activeTab, setActiveTab] = useState('Discover')
   const { theme, setTheme } = useContext(MyThemeContext)
   const isDark = theme === 'dark'
 
-  const toggleTheme = () => {
-    setTheme(isDark ? 'light' : 'dark')
-  }
-
   return (
-    <header className="dashboard-header">
-      <div className="dashboard-nav">
-        <Link to="/" className="studio-logo" onClick={() => setMenuOpen(false)}>
-          <img src={isDark ? '/white.png' : '/black.png'} alt="Trinetra Game Studio" />
-        </Link>
-
-        <nav className="desktop-links">
-          {navLinks.map((link) => (
-            <Link key={link.label} to={link.to} className="nav-link">
-              {link.label}
-            </Link>
-          ))}
-          <Link to="#" className="nav-link cart-link">
-            Cart
-            <span className="cart-badge">1</span>
-          </Link>
-        </nav>
-
-        <div className="header-actions">
-          <div className="search-box">
-            <input type="search" placeholder="Search for games..." />
-            <button>Search</button>
-          </div>
-
-          <button className="theme-toggle" onClick={toggleTheme} aria-label="Toggle theme">
-            {isDark ? <FiSun /> : <FiMoon />}
-          </button>
-
-          <button className="profile-button" aria-label="Profile">
-            <FiUser />
-          </button>
-        </div>
-
-        <button className="mobile-menu-button" onClick={() => setMenuOpen(!menuOpen)} aria-label="Toggle navigation">
-          {menuOpen ? <FiX /> : <FiMenu />}
+    <header className="store-header">
+      <div className="header-left">
+        <button className="header-back" aria-label="Go back">
+          <FiArrowLeft />
         </button>
+        <img
+          src={isDark ? '/white.png' : '/black.png'}
+          alt="Trinetra Game Store"
+          className="header-logo"
+        />
+        <div className="header-search">
+          <FiSearch className="search-icon" />
+          <input type="search" placeholder="Search store" />
+        </div>
       </div>
 
-      {menuOpen && (
-        <div className="mobile-panel">
-          <div className="search-box">
-            <input type="search" placeholder="Search for games..." />
-            <button>
-              <FiSearch />
-            </button>
-          </div>
-          {navLinks.map((link) => (
-            <Link key={link.label} to={link.to} className="nav-link" onClick={() => setMenuOpen(false)}>
-              {link.label}
-            </Link>
-          ))}
-          <Link to="#" className="nav-link cart-link" onClick={() => setMenuOpen(false)}>
-            <FiShoppingCart /> Cart <span className="cart-badge">1</span>
-          </Link>
-        </div>
-      )}
+      <nav className="header-tabs">
+        {navTabs.map((tab) => (
+          <button
+            key={tab}
+            className={`header-tab ${activeTab === tab ? 'active' : ''}`}
+            onClick={() => setActiveTab(tab)}
+          >
+            {tab}
+          </button>
+        ))}
+      </nav>
+
+      <div className="header-actions">
+        <button className="header-icon-btn" aria-label="Wishlist">
+          <FiBookmark />
+        </button>
+        <button className="header-icon-btn" aria-label="Gifts">
+          <FiGift />
+        </button>
+        <button className="header-icon-btn" aria-label="Cart">
+          <FiShoppingCart />
+        </button>
+        <span className="header-divider" />
+        <button className="header-icon-btn" aria-label="Friends">
+          <FiUsers />
+        </button>
+        <button
+          className="header-icon-btn theme-toggle-btn"
+          onClick={() => setTheme(isDark ? 'light' : 'dark')}
+          aria-label="Toggle theme"
+        >
+          {isDark ? <FiSun /> : <FiMoon />}
+        </button>
+        <button className="header-profile" aria-label="Profile">
+          <span>K</span>
+          <span className="online-dot" />
+        </button>
+      </div>
     </header>
   )
 }
