@@ -22,7 +22,17 @@ const TopReleases = () => {
       <div className="releases-grid">
         {topReleases.map((game) => (
           <article key={game.title} className="release-card">
-            <div className="release-poster" style={{ background: game.color }}>
+            <div
+              className="release-poster"
+              style={game.image ? {} : { background: game.color }}
+            >
+              {game.image && (
+                <img
+                  src={game.image}
+                  alt={game.title}
+                  className="release-poster-img"
+                />
+              )}
               <div className="release-poster-shine" />
             </div>
             <p className="release-type">Base Game</p>

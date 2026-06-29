@@ -32,7 +32,15 @@ const FeaturedSection = () => {
         <div className="featured-games-grid">
           {featuredGames.map((game) => (
             <article key={game.title} className="featured-game-item">
-              <div className="featured-game-thumb" style={{ background: game.color }} />
+              {game.image ? (
+                <img
+                  src={game.image}
+                  alt={game.title}
+                  className="featured-game-thumb featured-game-thumb-img"
+                />
+              ) : (
+                <div className="featured-game-thumb" style={{ background: game.color }} />
+              )}
               <div className="featured-game-info">
                 <h3>{game.title}</h3>
                 <div className="featured-game-price">

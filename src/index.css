@@ -121,7 +121,47 @@ input {
   position: sticky;
   top: 0;
   height: 100vh;
-  z-index: 100;
+  z-index: 200;
+  flex-shrink: 0;
+}
+
+/* Mobile: sidebar becomes a drawer */
+.sidebar-backdrop {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 199;
+  backdrop-filter: blur(2px);
+  animation: fadeIn 200ms ease;
+}
+
+.sidebar-close-btn {
+  display: none;
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  color: var(--text-secondary);
+  border-radius: 8px;
+  font-size: 20px;
+  transition: background 150ms, color 150ms;
+}
+
+.sidebar-close-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+}
+
+.sidebar-brand-text {
+  display: none;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.15em;
+  color: var(--accent-strong);
+  margin-bottom: 8px;
 }
 
 .sidebar-logo {
@@ -211,18 +251,75 @@ input {
   color: var(--text-primary);
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
+}
+
 /* ─── Header ─── */
+/* Wrapper so header-wrap can be sticky with both rows */
+.store-header-wrap {
+  position: sticky;
+  top: 0;
+  z-index: 150;
+  background: color-mix(in srgb, var(--bg-primary) 92%, transparent);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+}
+
 .store-header {
   display: flex;
   align-items: center;
-  gap: 24px;
-  padding: 12px 32px;
-  background: color-mix(in srgb, var(--bg-primary) 92%, transparent);
-  border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(16px);
-  position: sticky;
-  top: 0;
-  z-index: 50;
+  gap: 16px;
+  padding: 10px 32px;
+}
+
+/* Mobile nav tab strip — hidden on desktop */
+.header-mobile-tabs {
+  display: none;
+  align-items: center;
+  gap: 0;
+  overflow-x: auto;
+  padding: 0 12px 0;
+  scrollbar-width: none;
+  border-top: 1px solid var(--border);
+}
+
+.header-mobile-tabs::-webkit-scrollbar { display: none; }
+
+.header-mobile-tab {
+  position: relative;
+  flex-shrink: 0;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: color 150ms;
+  white-space: nowrap;
+}
+
+.header-mobile-tab:hover {
+  color: var(--text-primary);
+}
+
+.header-mobile-tab.active {
+  color: var(--accent-strong);
+}
+
+.header-mobile-tab.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 18px;
+  right: 18px;
+  height: 2px;
+  background: var(--accent-strong);
+  border-radius: 2px;
 }
 
 .header-logo {
@@ -243,6 +340,23 @@ input {
   align-items: center;
   gap: 12px;
   flex: 1;
+}
+
+/* Hamburger — hidden on desktop */
+.header-hamburger {
+  display: none;
+  width: 38px;
+  height: 38px;
+  place-items: center;
+  color: var(--text-primary);
+  border-radius: 8px;
+  font-size: 22px;
+  flex-shrink: 0;
+  transition: background 150ms;
+}
+
+.header-hamburger:hover {
+  background: var(--bg-hover);
 }
 
 .header-back {
@@ -390,6 +504,73 @@ input {
   border-radius: 50%;
 }
 
+/* ─── Mobile Bottom Tab Bar ─── */
+.mobile-tab-bar {
+  display: none; /* hidden on desktop */
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: color-mix(in srgb, var(--bg-primary) 96%, transparent);
+  backdrop-filter: blur(20px);
+  border-top: 1px solid var(--border);
+  z-index: 200;
+  align-items: stretch;
+  justify-content: space-around;
+  padding: 0 4px;
+  padding-bottom: env(safe-area-inset-bottom);
+  box-shadow: 0 -4px 24px rgba(0,0,0,0.15);
+}
+
+.mob-tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  flex: 1;
+  padding: 6px 4px;
+  color: var(--text-muted);
+  text-decoration: none;
+  border-radius: 12px;
+  transition: color 150ms, background 150ms;
+  min-width: 0;
+}
+
+.mob-tab:hover {
+  color: var(--text-primary);
+  background: var(--bg-hover);
+}
+
+.mob-tab--active {
+  color: var(--accent-strong) !important;
+}
+
+.mob-tab--active .mob-tab__icon {
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+}
+
+.mob-tab__icon {
+  width: 36px;
+  height: 28px;
+  display: grid;
+  place-items: center;
+  font-size: 20px;
+  border-radius: 8px;
+  transition: background 150ms;
+}
+
+.mob-tab__label {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+
 /* ─── Hero Carousel ─── */
 .hero-section {
   display: grid;
@@ -411,6 +592,24 @@ input {
   overflow: hidden;
   display: flex;
   align-items: center;
+  transition: background 400ms ease;
+}
+
+.hero-banner--fade {
+  opacity: 0.85;
+  transform: scale(0.995);
+  transition: opacity 200ms, transform 200ms;
+}
+
+/* Real image background */
+.hero-bg-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center top;
+  opacity: 0.35;
+  transition: opacity 400ms ease;
+  pointer-events: none;
 }
 
 .hero-speed-lines {
@@ -477,44 +676,28 @@ input {
   box-shadow: 0 4px 20px color-mix(in srgb, var(--accent) 40%, transparent);
 }
 
-.hero-characters {
+/* Dot indicators for mobile */
+.hero-dots {
   position: absolute;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  width: 55%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  gap: 8px;
-  padding: 24px;
-  pointer-events: none;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: none;
+  gap: 6px;
+  z-index: 3;
 }
 
-.hero-char {
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.15);
-  backdrop-filter: blur(4px);
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  transition: background 200ms, transform 200ms;
 }
 
-.hero-char-1 {
-  width: 120px;
-  height: 280px;
-  margin-bottom: -20px;
-  background: linear-gradient(180deg, rgba(255, 235, 59, 0.45), rgba(255, 152, 0, 0.15));
-}
-
-.hero-char-2 {
-  width: 100px;
-  height: 320px;
-  background: linear-gradient(180deg, rgba(255, 176, 0, 0.55), rgba(230, 81, 0, 0.2));
-}
-
-.hero-char-3 {
-  width: 110px;
-  height: 260px;
-  margin-bottom: 10px;
-  background: linear-gradient(180deg, rgba(240, 160, 0, 0.45), rgba(201, 121, 0, 0.12));
+.hero-dot.active {
+  background: #fff;
+  transform: scale(1.3);
 }
 
 .hero-sidebar {
@@ -549,6 +732,14 @@ input {
   height: 48px;
   border-radius: 8px;
   flex-shrink: 0;
+}
+
+.hero-thumb-img {
+  object-fit: cover;
+  width: 48px;
+  height: 48px;
+  border-radius: 8px;
+  display: block;
 }
 
 .hero-thumb-title {
@@ -714,6 +905,14 @@ input {
   flex-shrink: 0;
 }
 
+.featured-game-thumb-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+}
+
 .featured-game-info h3 {
   font-size: 14px;
   font-weight: 600;
@@ -875,6 +1074,16 @@ input {
   transition: box-shadow 200ms;
 }
 
+.release-poster-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+}
+
 .release-poster-shine {
   position: absolute;
   inset: 0;
@@ -884,6 +1093,7 @@ input {
     transparent 50%,
     rgba(0, 0, 0, 0.2) 100%
   );
+  z-index: 1;
 }
 
 .release-type {
@@ -949,6 +1159,184 @@ input {
 
   .releases-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ─── Tablet + Mobile: Drawer system (768px) ─── */
+@media (max-width: 768px) {
+
+  /* ── Sidebar becomes a slide-in drawer ── */
+  .store-sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100vh;
+    width: 240px;
+    align-items: flex-start;
+    padding: 20px 16px 24px;
+    border-right: 1px solid var(--border);
+    box-shadow: 4px 0 32px rgba(0, 0, 0, 0.35);
+    transform: translateX(-100%);
+    transition: transform 280ms cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 300;
+  }
+
+  /* When mobile-open class is applied, slide in */
+  .store-sidebar.mobile-open {
+    transform: translateX(0);
+    animation: slideInLeft 280ms cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  /* Show backdrop when open */
+  .store-sidebar.mobile-open ~ * .sidebar-backdrop,
+  .sidebar-backdrop {
+    display: block;
+  }
+
+  /* Show close button & brand text in drawer */
+  .sidebar-close-btn {
+    display: grid;
+  }
+
+  .sidebar-brand-text {
+    display: block;
+  }
+
+  /* Make nav links full-width horizontal in drawer */
+  .sidebar-nav {
+    align-items: flex-start;
+    width: 100%;
+    gap: 2px;
+  }
+
+  .sidebar-link {
+    flex-direction: row;
+    width: 100%;
+    gap: 14px;
+    padding: 12px 16px;
+    border-radius: 10px;
+  }
+
+  .sidebar-label {
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+  }
+
+  .sidebar-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+  }
+
+  .sidebar-letter {
+    width: 22px;
+    height: 22px;
+    flex-shrink: 0;
+  }
+
+  .sidebar-logo {
+    margin-bottom: 8px;
+    padding: 0;
+  }
+
+  .sidebar-logo-img {
+    max-width: 52px;
+  }
+
+  .sidebar-download {
+    margin-top: 8px;
+    align-self: flex-start;
+    margin-left: 8px;
+  }
+
+  /* ── Hamburger appears ── */
+  .header-hamburger {
+    display: grid;
+  }
+
+  /* ── Back arrow hides, logo shows in header ── */
+  .header-back {
+    display: none;
+  }
+
+  .header-logo {
+    display: block;
+    height: 30px;
+  }
+
+  /* Desktop tabs hidden on mobile — mobile strip replaces them */
+  .header-tabs {
+    display: none;
+  }
+
+  .store-header {
+    padding: 10px 16px;
+    gap: 10px;
+  }
+
+  /* ── Show mobile tab strip (Discover/Browse/News) ── */
+  .header-mobile-tabs {
+    display: flex;
+  }
+
+  /* ── Show bottom tab bar ── */
+  .mobile-tab-bar {
+    display: flex;
+  }
+
+  /* ── Page content: add bottom padding so content clears the tab bar ── */
+  .store-page {
+    padding: 0 16px 80px;
+  }
+
+  .hero-section {
+    grid-template-columns: 1fr;
+    margin-top: 16px;
+  }
+
+  .hero-banner {
+    min-height: 340px;
+  }
+
+  .hero-bg-image {
+    opacity: 0.45;
+  }
+
+  .hero-sidebar {
+    display: none;
+  }
+
+  .hero-dots {
+    display: flex;
+  }
+
+  .hero-content {
+    padding: 32px 24px;
+    max-width: 100%;
+  }
+
+  .featured-section {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-top: 24px;
+  }
+
+  .featured-games-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .releases-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .bottom-banner {
+    min-height: 160px;
+  }
+
+  /* Hide some header actions on tablet */
+  .header-icon-btn--hide-sm {
+    display: none;
   }
 }
 
@@ -1148,7 +1536,7 @@ input {
 
 @media (max-width: 640px) {
   .store-page {
-    padding: 0 16px 32px;
+    padding: 0 12px 32px;
   }
 
   .library-grid {
@@ -1161,23 +1549,107 @@ input {
   }
 
   .store-header {
-    padding: 12px 16px;
-    gap: 12px;
+    padding: 10px 12px;
+    gap: 8px;
   }
 
   .header-search {
     max-width: none;
   }
 
-  .hero-content {
-    padding: 28px;
+  .hero-banner {
+    min-height: 300px;
   }
 
-  .hero-characters {
-    display: none;
+  .hero-content {
+    padding: 24px 16px;
+  }
+
+  .hero-logo-badge {
+    font-size: 20px;
+  }
+
+  .hero-logo-badge strong {
+    font-size: 26px;
+  }
+
+  .hero-description {
+    font-size: 13px;
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
   }
 
   .releases-grid {
     grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .featured-games-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .featured-section {
+    margin-top: 20px;
+  }
+
+  .releases-section {
+    margin-top: 28px;
+  }
+}
+
+/* ─── Small Mobile (480px) ─── */
+@media (max-width: 480px) {
+  .store-header {
+    padding: 8px 12px;
+    gap: 6px;
+  }
+
+  .header-search input {
+    font-size: 13px;
+  }
+
+  .hero-banner {
+    min-height: 260px;
+  }
+
+  .hero-content {
+    padding: 20px 14px;
+  }
+
+  .hero-cta {
+    padding: 10px 20px;
+    font-size: 13px;
+  }
+
+  .releases-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .release-title {
+    font-size: 12px;
+  }
+
+  .release-price {
+    font-size: 12px;
+  }
+
+  .featured-hero-card {
+    min-height: 220px;
+    padding: 24px;
+  }
+
+  .featured-hero-card h2 {
+    font-size: 20px;
+  }
+
+  .bottom-banner {
+    min-height: 130px;
+  }
+
+  .bottom-banner-text h2 {
+    font-size: 20px;
   }
 }
