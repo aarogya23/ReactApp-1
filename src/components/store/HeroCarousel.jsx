@@ -18,7 +18,7 @@ const toHeroSlide = (game, index) => ({
   cta: 'Play Free',
   gradient: apiGradients[index % apiGradients.length],
   accent: '#ffb000',
-  image: game.thumbnail || game.image,
+  image: game.image || game.thumbnail,
   gameUrl: game.gameUrl,
 })
 

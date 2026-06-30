@@ -5,11 +5,13 @@ import TopReleases from './TopReleases'
 import BottomBanner from './BottomBanner'
 
 const GAMES_API_URL = 'https://www.freetogame.com/api/games'
+const GAME_DETAIL_API_URL = 'https://www.freetogame.com/api/game'
+const HIGH_QUALITY_GAME_LIMIT = 13
 
 const normalizeGame = (game) => ({
   id: game.id,
   title: game.title,
-  image: game.thumbnail,
+  image: game.image || game.thumbnail,
   thumbnail: game.thumbnail,
   description: game.short_description,
   shortDescription: game.short_description,
@@ -21,6 +23,23 @@ const normalizeGame = (game) => ({
   releaseDate: game.release_date,
   price: 'Free',
 })
+
+const fetchGameDetails = async (game, signal) => {
+  const response = await fetch(`${GAME_DETAIL_API_URL}?id=${game.id}`, { signal })
+
+  if (!response.ok) {
+    return game
+  }
+
+  const details = await response.json()
+  const highQualityImage = details.screenshots?.[0]?.image
+
+  return normalizeGame({
+    ...game,
+    ...details,
+    image: highQualityImage || details.thumbnail || game.thumbnail,
+  })
+}
 
 const StorePage = () => {
   const [games, setGames] = useState([])
@@ -40,7 +59,16 @@ const StorePage = () => {
         }
 
         const data = await response.json()
-        setGames(data.map(normalizeGame))
+        const priorityGames = data.slice(0, HIGH_QUALITY_GAME_LIMIT)
+        const remainingGames = data.slice(HIGH_QUALITY_GAME_LIMIT)
+        const highQualityGames = await Promise.all(
+          priorityGames.map((game) => fetchGameDetails(game, controller.signal))
+        )
+
+        setGames([
+          ...highQualityGames,
+          ...remainingGames.map(normalizeGame),
+        ])
         setStatus('success')
       } catch (err) {
         if (err.name === 'AbortError') return
