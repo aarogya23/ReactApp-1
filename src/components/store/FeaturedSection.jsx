@@ -2,17 +2,19 @@ import React from 'react'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { featuredGames } from '../../data/storeData'
 
-const FeaturedSection = () => {
+const FeaturedSection = ({ games = [], isLoading = false }) => {
+  const visibleGames = games.length > 0 ? games : featuredGames
+
   return (
-    <section className="featured-section">
+    <section className={`featured-section${isLoading ? ' store-section-loading' : ''}`}>
       <div className="featured-hero-card">
         <div className="featured-hero-bg">
-          <div className="featured-icon featured-icon-1">🕹️</div>
-          <div className="featured-icon featured-icon-2">🔥</div>
-          <div className="featured-icon featured-icon-3">🥊</div>
-          <div className="featured-icon featured-icon-4">🏎️</div>
+          <div className="featured-icon featured-icon-1" />
+          <div className="featured-icon featured-icon-2" />
+          <div className="featured-icon featured-icon-3" />
+          <div className="featured-icon featured-icon-4" />
         </div>
-        <h2>Discover Something New</h2>
+        <h2>Free Games to Try</h2>
         <button className="featured-cta">View More</button>
       </div>
 
@@ -30,8 +32,14 @@ const FeaturedSection = () => {
         </div>
 
         <div className="featured-games-grid">
-          {featuredGames.map((game) => (
-            <article key={game.title} className="featured-game-item">
+          {visibleGames.map((game) => (
+            <a
+              key={game.id || game.title}
+              className="featured-game-item"
+              href={game.gameUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
               {game.image ? (
                 <img
                   src={game.image}
@@ -50,10 +58,11 @@ const FeaturedSection = () => {
                       <span className="original-price">{game.originalPrice}</span>
                     </>
                   )}
-                  <span className="current-price">{game.price}</span>
+                  <span className="current-price">{game.genre || game.price}</span>
+                  {game.genre && <span className="free-price">{game.price}</span>}
                 </div>
               </div>
-            </article>
+            </a>
           ))}
         </div>
       </div>

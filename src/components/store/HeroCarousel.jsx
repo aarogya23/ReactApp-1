@@ -1,11 +1,32 @@
-import React, { useState, useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi'
 import { heroSlides } from '../../data/storeData'
 
-const HeroCarousel = () => {
+const apiGradients = [
+  'linear-gradient(135deg, #101820 0%, #1f4f46 45%, #d0a83f 100%)',
+  'linear-gradient(135deg, #181c25 0%, #5d3147 48%, #e88f3f 100%)',
+  'linear-gradient(135deg, #111827 0%, #27506d 52%, #8dc6ff 100%)',
+  'linear-gradient(135deg, #151515 0%, #47502f 48%, #d6c35c 100%)',
+  'linear-gradient(135deg, #16131d 0%, #3b5f7a 50%, #c7e7e1 100%)',
+]
+
+const toHeroSlide = (game, index) => ({
+  id: game.id,
+  title: game.title,
+  tagline: `${game.genre} / ${game.platform}`,
+  description: game.shortDescription,
+  cta: 'Play Free',
+  gradient: apiGradients[index % apiGradients.length],
+  accent: '#ffb000',
+  image: game.thumbnail || game.image,
+  gameUrl: game.gameUrl,
+})
+
+const HeroCarousel = ({ games = [], isLoading = false }) => {
   const [activeIndex, setActiveIndex] = useState(0)
   const [animating, setAnimating] = useState(false)
-  const slide = heroSlides[activeIndex]
+  const slides = games.length > 0 ? games.map(toHeroSlide) : heroSlides
+  const slide = slides[activeIndex] || slides[0]
 
   const goTo = (index) => {
     if (animating) return
@@ -14,23 +35,36 @@ const HeroCarousel = () => {
     setActiveIndex(index)
   }
 
-  const goPrev = () => goTo(activeIndex === 0 ? heroSlides.length - 1 : activeIndex - 1)
-  const goNext = () => goTo(activeIndex === heroSlides.length - 1 ? 0 : activeIndex + 1)
+  const goPrev = () => goTo(activeIndex === 0 ? slides.length - 1 : activeIndex - 1)
+  const goNext = () => goTo(activeIndex === slides.length - 1 ? 0 : activeIndex + 1)
 
-  // Auto-play
   useEffect(() => {
-    const timer = setInterval(goNext, 5000)
+    const timer = setInterval(() => {
+      setActiveIndex((currentIndex) => (
+        currentIndex === slides.length - 1 ? 0 : currentIndex + 1
+      ))
+    }, 5000)
+
     return () => clearInterval(timer)
-  }, [activeIndex])
+  }, [slides.length])
+
+  useEffect(() => {
+    setActiveIndex(0)
+  }, [games])
+
+  const openGame = () => {
+    if (slide.gameUrl) {
+      window.open(slide.gameUrl, '_blank', 'noopener,noreferrer')
+    }
+  }
 
   return (
-    <section className="hero-section">
+    <section className={`hero-section${isLoading ? ' store-section-loading' : ''}`}>
       <div className="hero-main">
         <div
           className={`hero-banner${animating ? ' hero-banner--fade' : ''}`}
           style={{ background: slide.gradient }}
         >
-          {/* Background image with overlay */}
           {slide.image && (
             <div
               className="hero-bg-image"
@@ -47,26 +81,24 @@ const HeroCarousel = () => {
             </div>
             <p className="hero-tagline">{slide.tagline}</p>
             <p className="hero-description">{slide.description}</p>
-            <button className="hero-cta">{slide.cta}</button>
+            <button className="hero-cta" onClick={openGame}>{slide.cta}</button>
           </div>
 
-          {/* Dot indicators (mobile) */}
           <div className="hero-dots">
-            {heroSlides.map((_, i) => (
+            {slides.map((_, index) => (
               <button
-                key={i}
-                className={`hero-dot${i === activeIndex ? ' active' : ''}`}
-                onClick={() => goTo(i)}
-                aria-label={`Slide ${i + 1}`}
+                key={index}
+                className={`hero-dot${index === activeIndex ? ' active' : ''}`}
+                onClick={() => goTo(index)}
+                aria-label={`Slide ${index + 1}`}
               />
             ))}
           </div>
         </div>
       </div>
 
-      {/* Sidebar thumbnails (desktop) */}
       <div className="hero-sidebar">
-        {heroSlides.map((item, index) => (
+        {slides.map((item, index) => (
           <button
             key={item.id}
             className={`hero-sidebar-item ${index === activeIndex ? 'active' : ''}`}

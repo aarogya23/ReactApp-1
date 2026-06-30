@@ -2,12 +2,14 @@ import React from 'react'
 import { FiChevronLeft, FiChevronRight, FiChevronRight as FiArrow } from 'react-icons/fi'
 import { topReleases } from '../../data/storeData'
 
-const TopReleases = () => {
+const TopReleases = ({ games = [], isLoading = false }) => {
+  const visibleGames = games.length > 0 ? games : topReleases
+
   return (
-    <section className="releases-section">
+    <section className={`releases-section${isLoading ? ' store-section-loading' : ''}`}>
       <div className="releases-header">
         <h2>
-          Top New Releases <FiArrow className="releases-arrow" />
+          Free to Play Games <FiArrow className="releases-arrow" />
         </h2>
         <div className="carousel-controls">
           <button aria-label="Previous">
@@ -20,8 +22,14 @@ const TopReleases = () => {
       </div>
 
       <div className="releases-grid">
-        {topReleases.map((game) => (
-          <article key={game.title} className="release-card">
+        {visibleGames.map((game) => (
+          <a
+            key={game.id || game.title}
+            className="release-card"
+            href={game.gameUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
             <div
               className="release-poster"
               style={game.image ? {} : { background: game.color }}
@@ -35,10 +43,10 @@ const TopReleases = () => {
               )}
               <div className="release-poster-shine" />
             </div>
-            <p className="release-type">Base Game</p>
+            <p className="release-type">{game.genre || 'Base Game'}</p>
             <h3 className="release-title">{game.title}</h3>
-            <p className="release-price">{game.price}</p>
-          </article>
+            <p className="release-price">{game.platform || game.price}</p>
+          </a>
         ))}
       </div>
     </section>
