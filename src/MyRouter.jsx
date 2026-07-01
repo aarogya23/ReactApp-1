@@ -14,6 +14,8 @@ import Counter from './hooks/Counter'
 import Classroom from './pages/Classroom'
 import DataFetch from './hooks/DataFetch'
 import Post from './hooks/Post'
+import ReduxCounter from './pages/ReduxCounter'
+import ReduxPerson from './pages/ReduxPerson'
 const MyRouter = () => {
   return (
     <Router>    
@@ -40,6 +42,9 @@ const MyRouter = () => {
             <Route path='classroom' element={<Classroom/>} />
             <Route path='datafetch' element={<DataFetch/>} />
             <Route path='/post/:id' element={<Post/>} />
+
+            <Route path='/reduxCounter' element={<ReduxCounter/>} />
+            <Route path='/reduxPerson' element={<ReduxPerson/>} />
             </Route>  
         </Routes>    
     </Router>

@@ -609,6 +609,15 @@ input {
   transition: background 400ms ease;
 }
 
+.hero-banner::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0.12));
+  pointer-events: none;
+}
+
 .hero-banner--fade {
   opacity: 0.85;
   transform: scale(0.995);
@@ -629,6 +638,7 @@ input {
 .hero-speed-lines {
   position: absolute;
   inset: 0;
+  z-index: 1;
   background:
     repeating-linear-gradient(
       -35deg,
@@ -1092,6 +1102,7 @@ input {
   transition: transform 200ms;
   color: inherit;
   text-decoration: none;
+  min-width: 0;
 }
 
 .release-card:hover {
@@ -1572,8 +1583,15 @@ input {
 }
 
 @media (max-width: 640px) {
+  .store-content {
+    overflow-x: hidden;
+  }
+
   .store-page {
-    padding: 0 12px 32px;
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
+    padding: 0 12px 84px;
   }
 
   .library-grid {
@@ -1596,10 +1614,26 @@ input {
 
   .hero-banner {
     min-height: 300px;
+    align-items: flex-end;
+    border-radius: 12px;
+  }
+
+  .hero-banner::after {
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.12) 0%, rgba(0, 0, 0, 0.72) 100%),
+      linear-gradient(90deg, rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0.08));
+  }
+
+  .hero-bg-image {
+    opacity: 0.72;
+    background-position: center;
   }
 
   .hero-content {
-    padding: 24px 16px;
+    width: 100%;
+    padding: 24px 16px 46px;
+    color: #ffffff;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.45);
   }
 
   .hero-logo-badge {
@@ -1612,6 +1646,8 @@ input {
 
   .hero-description {
     font-size: 13px;
+    line-height: 1.45;
+    margin-bottom: 16px;
     -webkit-line-clamp: 3;
     display: -webkit-box;
     -webkit-box-orient: vertical;
@@ -1619,20 +1655,109 @@ input {
   }
 
   .releases-grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 10px;
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+
+  .releases-grid::-webkit-scrollbar,
+  .featured-games-grid::-webkit-scrollbar {
+    display: none;
+  }
+
+  .release-card {
+    flex: 0 0 76%;
+    scroll-snap-align: start;
+  }
+
+  .release-poster {
+    border-radius: 10px;
   }
 
   .featured-games-grid {
-    grid-template-columns: 1fr;
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding-bottom: 8px;
+    scroll-snap-type: x proximity;
+    scrollbar-width: none;
+  }
+
+  .featured-game-item {
+    flex: 0 0 78%;
+    min-width: 0;
+    align-items: flex-start;
+    padding: 8px 0;
+    scroll-snap-align: start;
+  }
+
+  .featured-game-thumb,
+  .featured-game-thumb-img {
+    width: 72px;
+    height: 72px;
+  }
+
+  .featured-game-info {
+    min-width: 0;
+  }
+
+  .featured-game-info h3,
+  .release-title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .featured-game-info h3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
   }
 
   .featured-section {
     margin-top: 20px;
   }
 
+  .featured-hero-card {
+    min-height: 170px;
+    border-radius: 12px;
+    padding: 24px 18px;
+  }
+
+  .featured-hero-card h2 {
+    max-width: 210px;
+    margin-bottom: 18px;
+    font-size: 24px;
+  }
+
+  .featured-icon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .featured-icon-1 { top: 18%; left: 15%; }
+  .featured-icon-2 { top: 12%; right: 18%; width: 38px; height: 38px; }
+  .featured-icon-3 { bottom: 28%; left: 20%; width: 40px; height: 40px; }
+  .featured-icon-4 { bottom: 22%; right: 17%; width: 38px; height: 38px; }
+
   .releases-section {
     margin-top: 28px;
+  }
+
+  .bottom-banner {
+    min-height: 150px;
+    border-radius: 12px;
+  }
+
+  .bottom-banner-text {
+    padding: 0 16px;
+  }
+
+  .bottom-banner-text h2 {
+    font-size: 22px;
+    line-height: 1.15;
   }
 }
 
@@ -1661,8 +1786,11 @@ input {
   }
 
   .releases-grid {
-    grid-template-columns: 1fr 1fr;
     gap: 8px;
+  }
+
+  .release-card {
+    flex-basis: 82%;
   }
 
   .release-title {
